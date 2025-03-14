@@ -6,6 +6,17 @@ pipeline {
     }
   }
   stages {
+    stage('Setup Java 17') {
+      steps {
+        sh '''
+          apt-get update
+          apt-get install -y openjdk-17-jdk
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          export PATH=$JAVA_HOME/bin:$PATH
+          java -version
+        '''
+      }
+    }
     stage('Checkout') {
       steps {
         sh 'echo passed'
